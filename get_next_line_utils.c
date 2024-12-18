@@ -6,7 +6,7 @@
 /*   By: mikurek <mikurek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:32:09 by mikurek           #+#    #+#             */
-/*   Updated: 2024/12/18 23:43:45 by mikurek          ###   ########.fr       */
+/*   Updated: 2024/12/18 23:47:28 by mikurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	if (!s1 && !s2)
-		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	join = malloc((len + 1) * sizeof(char));
 	if (join == 0)
