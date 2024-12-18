@@ -6,7 +6,7 @@
 /*   By: mikurek <mikurek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:32:09 by mikurek           #+#    #+#             */
-/*   Updated: 2024/12/17 20:43:31 by mikurek          ###   ########.fr       */
+/*   Updated: 2024/12/18 22:43:58 by mikurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *str)
 {
 	int	len;
 
+	if (!str)
+		return (0);
 	len = 0;
 	while (*str)
 	{

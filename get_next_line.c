@@ -6,12 +6,11 @@
 /*   By: mikurek <mikurek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:17:13 by mikurek           #+#    #+#             */
-/*   Updated: 2024/12/18 21:49:19 by mikurek          ###   ########.fr       */
+/*   Updated: 2024/12/18 22:39:43 by mikurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-	#include <stdio.h>
 
 int	ft_check_for_line(char *str)
 {
@@ -31,28 +30,34 @@ char	*ft_read_file(int fd, char *stream)
 {
 	char	*buffer;
 	int		bytes_read;
+	char	*temp;
 
-	bytes_read = BUFFER_SIZE;
-	while (!ft_check_for_line(stream))
+	bytes_read = 1;
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	while (!ft_check_for_line(stream) && bytes_read > 0)
 	{
-		buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		buffer[BUFFER_SIZE] = 0;
-		stream = ft_strjoin(stream, buffer);
-		if (bytes_read < BUFFER_SIZE)
-			break ;
+		buffer[bytes_read] = 0;
+		temp = ft_strjoin(stream, buffer);
+		stream = temp;
 	}
+	free(buffer);
 	return (stream);
 }
 
 char	*ft_cut_stream(char *stream)
 {
+	char	*cut;
 	int		i;
 
 	i = 0;
 	while (stream[i] && stream[i] != '\n')
 		i++;
-	return (ft_substr(stream, i + 1, ft_strlen(stream) - i));
+	cut = ft_substr(stream, i + 1, ft_strlen(stream) - i);
+	free(stream);
+	return (cut);
 }
 
 char	*ft_read_line(char *stream)
@@ -70,7 +75,6 @@ char	*ft_read_line(char *stream)
 char	*get_next_line(int fd)
 {
 	static char	*stream;
-	char		*buffer;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
