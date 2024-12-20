@@ -79,3 +79,23 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join[i + j] = 0;
 	return (join);
 }
+
+char	*ft_strdup(const char *s)
+{
+	int		len;
+	int		i;
+	char	*result;
+
+	len = ft_strlen((char *)s);
+	result = malloc((len + 1) * sizeof(char));
+	if (result == NULL)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		result[i] = s[i];
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
+}
